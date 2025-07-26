@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime List | NEPU Paradise</title>
+    <style>
+        /* Shared Styles with index.html */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Navigation Bar - Identical to index.html */
+        nav {
+            background-color: #2c3e50;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+        }
+        
+        .logo {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 25px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 0;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: #3498db;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #3498db;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Anime List Header */
+        .anime-header {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://getwallpapers.com/wallpaper/full/c/9/9/809197-beautiful-cute-anime-background-1920x1080-for-android-40.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 60px;
+            position: relative;
+        }
+        
+        .anime-header h1 {
+            font-size: 3rem;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Main Content */
+        .anime-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+        
+        .filter-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .filter-group {
+            margin-bottom: 15px;
+        }
+        
+        .filter-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        
+        .filter-group select,
+        .filter-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .filter-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .anime-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .anime-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .anime-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .anime-image {
+            height: 350px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .anime-rating {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        
+        .anime-info {
+            padding: 20px;
+        }
+        
+        .anime-info h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .anime-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .anime-desc {
+            color: #555;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .anime-btn {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+        
+        .anime-btn:hover {
+            background: #2980b9;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        
+        .page-btn {
+            background: white;
+            color: #2c3e50;
+            border: 1px solid #ddd;
+            padding: 8px 15px;
+            margin: 0 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .page-btn:hover,
+        .page-btn.active {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+        /* Footer - Same as index.html */
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                padding: 10px;
+            }
+            
+            .logo {
+                margin-bottom: 10px;
+            }
+            
+            .nav-links {
+                width: 100%;
+                justify-content: space-around;
+            }
+            
+            .nav-links li {
+                margin: 0;
+            }
+            
+            .anime-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .anime-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .anime-header h1 {
+                font-size: 2rem;
+            }
+            
+            .anime-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar - Same as index.html -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">NEPU Paradise</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="animelist.html">Anime List</a></li>
+                <li><a href="genres.html">Genres</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Anime List Header -->
+    <header class="anime-header">
+        <h1>Anime Collection</h1>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="anime-container">
+        <section class="filter-section">
+            <h2>Filter Anime</h2>
+            <div class="filter-group">
+                <label for="genre">Genre</label>
+                <select id="genre">
+                    <option value="all">All Genres</option>
+                    <option value="action">Action</option>
+                    <option value="adventure">Adventure</option>
+                    <option value="romance">Romance</option>
+                    <option value="comedy">Comedy</option>
+                    <option value="fantasy">Fantasy</option>
+                    <option value="sci-fi">Sci-Fi</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="season">Season</label>
+                <select id="season">
+                    <option value="all">All Seasons</option>
+                    <option value="winter">Winter</option>
+                    <option value="spring">Spring</option>
+                    <option value="summer">Summer</option>
+                    <option value="fall">Fall</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="year">Year</label>
+                <input type="number" id="year" placeholder="All Years" min="1990" max="2023">
+            </div>
+            <button class="filter-btn">Apply Filters</button>
+        </section>
+        
+        <div class="anime-grid">
+            <!-- Anime 1 -->
+            <div class="anime-card">
+                <div class="anime-image" style="background-image: url('https://www.denofgeek.com/wp-content/uploads/2022/04/FPbgN6-XwAsJfar.jpeg?resize=732,1024');">
+                    <span class="anime-rating">8.9</span>
+                </div>
+                <div class="anime-info">
+                    <h3>Attack on Titan: Final Season</h3>
+                    <div class="anime-meta">
+                        <span>TV Series</span>
+                        <span>2020</span>
+                    </div>
+                    <p class="anime-desc">The war for Paradis zeroes in on Shiganshina just as Jaegerists have seized control. The fate of the world hangs in the balance as Eren pushes forward with his plan.</p>
+                    <a href="#" class="anime-btn">View Details</a>
+                </div>
+            </div>
+            
+            <!-- Anime 2 -->
+            <div class="anime-card">
+                <div class="anime-image" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9Lgq529Y4LjPHofKnXOMSyu9YbLQzAzpPNA&s');">
+                    <span class="anime-rating">9.2</span>
+                </div>
+                <div class="anime-info">
+                    <h3>Demon Slayer: Mugen Train</h3>
+                    <div class="anime-meta">
+                        <span>Movie</span>
+                        <span>2020</span>
+                    </div>
+                    <p class="anime-desc">Tanjiro and the group have completed their rehabilitation training at the Butterfly Mansion, and they arrive to their next mission on the Mugen Train.</p>
+                    <a href="#" class="anime-btn">View Details</a>
+                </div>
+            </div>
+            
+            <!-- Anime 3 -->
+            <div class="anime-card">
+                <div class="anime-image" style="background-image: url('https://m.media-amazon.com/images/M/MV5BNmI1MmYxNWQtY2E5NC00ZTlmLWIzZGEtNzM1YmE3NDA5NzhjXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg');">
+                    <span class="anime-rating">8.5</span>
+                </div>
+                <div class="anime-info">
+                    <h3>Jujutsu Kaisen</h3>
+                    <div class="anime-meta">
+                        <span>TV Series</span>
+                        <span>2020</span>
+                    </div>
+                    <p class="anime-desc">Yuuji Itadori is a boy with tremendous physical strength, though he lives a completely ordinary high school life. One day, to save a friend, he eats a cursed finger.</p>
+                    <a href="#" class="anime-btn">View Details</a>
+                </div>
+            </div>
+            
+            <!-- Anime 4 -->
+            <div class="anime-card">
+                <div class="anime-image" style="background-image: url('https://m.media-amazon.com/images/M/MV5BY2QzODA5OTQtYWJlNi00ZjIzLThhNTItMDMwODhlYzYzMjA2XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg');">
+                    <span class="anime-rating">8.7</span>
+                </div>
+                <div class="anime-info">
+                    <h3>My Hero Academia</h3>
+                    <div class="anime-meta">
+                        <span>TV Series</span>
+                        <span>2016</span>
+                    </div>
+                    <p class="anime-desc">A superhero-loving boy without any powers is determined to enroll in a prestigious hero academy and learn what it really means to be a hero.</p>
+                    <a href="#" class="anime-btn">View Details</a>
+                </div>
+            </div>
+            
+            <!-- Anime 5 -->
+            <div class="anime-card">
+                <div class="anime-image" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP6IWO4i0Dya5LkIC7g77uEuy_J41Ar0RDig&sg');">
+                    <span class="anime-rating">8.3</span>
+                </div>
+                <div class="anime-info">
+                    <h3>Spy x Family</h3>
+                    <div class="anime-meta">
+                        <span>TV Series</span>
+                        <span>2022</span>
+                    </div>
+                    <p class="anime-desc">A spy on an undercover mission gets married and adopts a child as part of his cover. His wife is a deadly assassin, and his daughter is a telepath!</p>
+                    <a href="#" class="anime-btn">View Details</a>
+                </div>
+            </div>
+            
+            <!-- Anime 6 -->
+            <div class="anime-card">
+                <div class="anime-image" style="background-image: url('https://m.media-amazon.com/images/M/MV5BNDA3MGNmZTEtMzFiMy00ZmViLThhNmQtMjQ4ZDc5MDEyN2U1XkEyXkFqcGc@._V1_.jpg');">
+                    <span class="anime-rating">9.0</span>
+                </div>
+                <div class="anime-info">
+                    <h3>Vinland Saga</h3>
+                    <div class="anime-meta">
+                        <span>TV Series</span>
+                        <span>2019</span>
+                    </div>
+                    <p class="anime-desc">Young Thorfinn grew up listening to the stories of old sailors that had traveled the ocean and settled in a new land far to the west.</p>
+                    <a href="#" class="anime-btn">View Details</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="pagination">
+            <button class="page-btn">❮</button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn">4</button>
+            <button class="page-btn">5</button>
+            <button class="page-btn">❯</button>
+        </div>
+    </main>
+    
+    <!-- Footer - Same as index.html -->
+    <footer>
+        <p>&copy; 2025 NEPU Paradise. All rights reserved.</p>
+    </footer>
+</body>
+</html>

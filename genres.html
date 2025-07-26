@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Genres | NEPU Paradise</title>
+    <style>
+        /* Shared Styles with index.html */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Navigation Bar - Identical to index.html */
+        nav {
+            background-color: #2c3e50;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+        }
+        
+        .logo {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 25px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 0;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: #3498db;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #3498db;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Genre Header */
+        .genre-header {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://getwallpapers.com/wallpaper/full/c/9/9/809197-beautiful-cute-anime-background-1920x1080-for-android-40.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 60px;
+            position: relative;
+        }
+        
+        .genre-header h1 {
+            font-size: 3rem;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Main Content */
+        .genre-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+        
+        .genre-intro {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .genre-intro h2 {
+            color: #2c3e50;
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        .genre-intro p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+        
+        .genre-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .genre-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .genre-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .genre-image {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .genre-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .genre-info {
+            padding: 20px;
+        }
+        
+        .genre-info p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+        
+        .genre-btn {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .genre-btn:hover {
+            background: #2980b9;
+        }
+
+        /* Footer - Same as index.html */
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                padding: 10px;
+            }
+            
+            .logo {
+                margin-bottom: 10px;
+            }
+            
+            .nav-links {
+                width: 100%;
+                justify-content: space-around;
+            }
+            
+            .nav-links li {
+                margin: 0;
+            }
+            
+            .genre-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .genre-intro h2 {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .genre-header h1 {
+                font-size: 2rem;
+            }
+            
+            .genre-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar - Same as index.html -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">NEPU Paradise</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="animelist.html">Anime List</a></li>
+                <li><a href="genres.html">Genres</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Genre Header -->
+    <header class="genre-header">
+        <h1>Explore Anime Genres</h1>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="genre-container">
+        <section class="genre-intro">
+            <h2>Discover Your Favorite Anime Categories</h2>
+            <p>Browse through our extensive collection of anime genres to find exactly what you're looking for. From action-packed adventures to heartwarming romances, we've got it all!</p>
+        </section>
+        
+        <div class="genre-grid">
+            <!-- Action -->
+            <div class="genre-card">
+                <div class="genre-image" style="background-image: url('https://res.cloudinary.com/jerrick/image/upload/c_scale,f_jpg,q_auto/lgi39qi7kmzdipemivm1.jpg');">
+                    <div class="genre-title">Action</div>
+                </div>
+                <div class="genre-info">
+                    <p>High-energy anime featuring intense battles, martial arts, and thrilling fight sequences that will keep you on the edge of your seat.</p>
+                    <a href="animelist.html?genre=action" class="genre-btn">View Action Anime</a>
+                </div>
+            </div>
+            
+            <!-- Adventure -->
+            <div class="genre-card">
+                <div class="genre-image" style="background-image: url('https://static1.cbrimages.com/wordpress/wp-content/uploads/2024/11/10-best-isekai-anime-for-fans-of-fantasy-adventures.jpg');">
+                    <div class="genre-title">Adventure</div>
+                </div>
+                <div class="genre-info">
+                    <p>Epic journeys through fantastical worlds with exciting quests, mysterious discoveries, and unforgettable characters.</p>
+                    <a href="animelist.html?genre=adventure" class="genre-btn">View Adventure Anime</a>
+                </div>
+            </div>
+            
+            <!-- Romance -->
+            <div class="genre-card">
+                <div class="genre-image" style="background-image: url('https://preview.redd.it/my-favorite-romance-anime-manga-what-would-you-recommend-v0-nktyxuo670fd1.jpeg?auto=webp&s=eb9bb14079010fc789781a2fa33950f643348922');">
+                    <div class="genre-title">Romance</div>
+                </div>
+                <div class="genre-info">
+                    <p>Heartwarming stories about love, relationships, and emotional connections that will make you laugh, cry, and fall in love.</p>
+                    <a href="animelist.html?genre=romance" class="genre-btn">View Romance Anime</a>
+                </div>
+            </div>
+            
+            <!-- Comedy -->
+            <div class="genre-card">
+                <div class="genre-image" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0T2gzhncNhMG5oFdaszG5k7uXd76YgN80cQ&s');">
+                    <div class="genre-title">Comedy</div>
+                </div>
+                <div class="genre-info">
+                    <p>Lighthearted anime full of humor, hilarious situations, and memorable gags that will keep you laughing throughout.</p>
+                    <a href="animelist.html?genre=comedy" class="genre-btn">View Comedy Anime</a>
+                </div>
+            </div>
+            
+            <!-- Fantasy -->
+            <div class="genre-card">
+                <div class="genre-image" style="background-image: url('https://preview.redd.it/3x3-of-great-fantasy-anime-i-highly-recommend-v0-zgbt2csb1nzd1.png?width=1080&crop=smart&auto=webp&s=d5e1c189a45824e2c023532626c63db3b863c031');">
+                    <div class="genre-title">Fantasy</div>
+                </div>
+                <div class="genre-info">
+                    <p>Magical worlds with supernatural elements, mythical creatures, and extraordinary adventures beyond imagination.</p>
+                    <a href="animelist.html?genre=fantasy" class="genre-btn">View Fantasy Anime</a>
+                </div>
+            </div>
+            
+            <!-- Sci-Fi -->
+            <div class="genre-card">
+                <div class="genre-image" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqPzs59F3w1kP825vBCjSCAo1WIqO38pTS3w&s');">
+                    <div class="genre-title">Sci-Fi</div>
+                </div>
+                <div class="genre-info">
+                    <p>Futuristic settings with advanced technology, space exploration, and thought-provoking concepts about humanity's future.</p>
+                    <a href="animelist.html?genre=sci-fi" class="genre-btn">View Sci-Fi Anime</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer - Same as index.html -->
+    <footer>
+        <p>&copy; 2025 NEPU Paradise. All rights reserved.</p>
+    </footer>
+</body>
+</html>

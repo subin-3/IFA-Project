@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | NEPU Paradise</title>
+    <style>
+        /* Shared Styles with index.html */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Navigation Bar - Identical to index.html */
+        nav {
+            background-color: #2c3e50;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+        }
+        
+        .logo {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 25px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 0;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: #3498db;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #3498db;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* About Page Header */
+        .about-header {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://getwallpapers.com/wallpaper/full/c/9/9/809197-beautiful-cute-anime-background-1920x1080-for-android-40.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 60px;
+            position: relative;
+        }
+        
+        .about-header h1 {
+            font-size: 3rem;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* About Content Section */
+        .about-content {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 40px;
+        }
+        
+        .about-text {
+            flex: 2;
+        }
+        
+        .about-text h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            align-self: center;
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Team Section */
+        .team-section {
+            background-color: #ecf0f1;
+            padding: 50px 0;
+        }
+        
+        .team-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .team-title {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 40px;
+            font-size: 2rem;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .team-member {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 5px solid #3498db;
+        }
+        
+        .team-member h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .team-member p {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        /* Footer - Same as index.html */
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                padding: 10px;
+            }
+            
+            .logo {
+                margin-bottom: 10px;
+            }
+            
+            .nav-links {
+                width: 100%;
+                justify-content: space-around;
+            }
+            
+            .nav-links li {
+                margin: 0;
+            }
+            
+            .about-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .about-header h1 {
+                font-size: 2rem;
+            }
+            
+            .about-text h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar - Same as index.html -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">NEPU Paradise</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="animelist.html">Anime List</a></li>
+                <li><a href="genres.html">Genres</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- About Header -->
+    <header class="about-header">
+        <h1>About NEPU Paradise</h1>
+    </header>
+    
+    <!-- Main About Content -->
+    <main class="about-content">
+        <div class="about-text">
+            <h2>Our Story</h2>
+            <p>Founded in 2025, NEPU Paradise began as a passion project by a group of anime enthusiasts who wanted to create a welcoming space for fans worldwide. What started as a small community has grown into one of the most comprehensive anime platforms on the web.</p>
+            
+            <h2>Our Mission</h2>
+            <p>At NEPU Paradise, we believe anime is more than entertainment - it's a cultural phenomenon that brings people together. Our mission is to provide high-quality content, accurate information, and a vibrant community for anime lovers of all levels.</p>
+            
+            <h2>What We Offer</h2>
+            <p>From classic series to the latest releases, NEPU Paradise offers comprehensive anime databases, detailed reviews, news updates, and a platform for fans to connect and discuss their favorite shows.</p>
+        </div>
+        
+        <div class="about-image">
+            <img src="https://wallpapers.com/images/hd/anime-collage-3840-x-2090-wallpaper-d5el5ypii20i4hgu.jpg" alt="NEPU Paradise Team">
+        </div>
+    </main>
+    
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="team-container">
+            <h2 class="team-title">Meet Our Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="https://scontent.fktm20-1.fna.fbcdn.net/v/t39.30808-6/480272547_1419755252340976_1600565493556727049_n.jpg?stp=dst-jpg_p526x296_tt6&_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeEK4Wm0UUDumObcCVrmM_2LK8hFTUVlG4wryEVNRWUbjHPfADaU_7CNW5KO_8hvWHMRuipEan917LonJtUgL22G&_nc_ohc=m5vPwBLrxb8Q7kNvwEmC1fl&_nc_oc=AdlePDQAUZ8PgFNTDCbB6fDLDi3ijdMpLi-sXSqqQHHBBBM9Fd8Pr9iMWfueBVqveo7oLpvdZOFRndOvVaYp4jXU&_nc_zt=23&_nc_ht=scontent.fktm20-1.fna&_nc_gid=Dw1XHQbqKJiu-sO5mzQesg&oh=00_AfRP4TscmK2ZSXljEZlPfxWzik5-OqXdngAcb8sRV8FfWQ&oe=688A9EDC" alt="Team Member">
+                    <h3>Sanjeev Shrestha</h3>
+                    <p>Founder & CEO</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://scontent.fktm20-1.fna.fbcdn.net/v/t39.30808-1/505339971_1243618670881968_3395150843870380896_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=110&ccb=1-7&_nc_sid=e99d92&_nc_eui2=AeF9QPIbZNxC1ixtjgjgln3-np-amMqE1qKen5qYyoTWorcrdHQfFO_eouo55WH4dnuJl7GBiS32AoN5lsB7kWCb&_nc_ohc=Kl8bas_B5eMQ7kNvwELxlJF&_nc_oc=Adl-0sl1s0kz3Txwik7ZPUBOz28-F7jeM-bdZJQUFASMb1QbmXsL_FBY23d7_HOJYYeQEulx0Bds8dBlPcXvQIlg&_nc_zt=24&_nc_ht=scontent.fktm20-1.fna&_nc_gid=tsi3B0CnUSjkJXSEM8U1fw&oh=00_AfTnYT9Qn8HSNmDH04FFt5mBPF4KNhG06XJMIx9UuF-htA&oe=688A9C30" alt="Team Member">
+                    <h3>Bibek Thatal</h3>
+                    <p>Content Director</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://scontent.fktm20-1.fna.fbcdn.net/v/t1.6435-1/72201306_104696034275845_3498107732806860800_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=105&ccb=1-7&_nc_sid=e99d92&_nc_eui2=AeHgQGy4C9ms-4qgQdrJ5JbQ5PfxzjNY0e7k9_HOM1jR7rHb8S4sCuQMprrdvaDs61Tjjb7EACxl2yPZaS5CBnO3&_nc_ohc=DbptmljwCnwQ7kNvwHKyKwZ&_nc_oc=Adkrfih-_3RtWkOoZbYBnwrAj6Tdtlcuo7J3-9X-98WF6JFduzgZRGt0XxCYYNEZW_9q77jUzEndDjzqBcSl4I8l&_nc_zt=24&_nc_ht=scontent.fktm20-1.fna&_nc_gid=ce4xIUmf8fpq2cBSbJ5jVQ&oh=00_AfRW_Xei4qP64t0kSiJnNSFE14j95_tRVViTjHbXULxsRQ&oe=68AC3AFB" alt="Team Member">
+                    <h3>Prajwal Adhikari</h3>
+                    <p>Community Manager</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer - Same as index.html -->
+    <footer>
+        <p>&copy; 2025 NEPU Paradise. All rights reserved.</p>
+    </footer>
+</body>
+</html>
